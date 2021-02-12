@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
   const randomInd = Math.floor(Math.random() * 3);
   let curr_text_msg = messages[randomInd];
   let today = new Date();
-  if (today.getDay() == 6 || today.getDay() == 0) {
+  if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
 
