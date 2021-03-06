@@ -1,12 +1,13 @@
 const express = require("express");
-
+const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
 
 const app = express();
 
 const router = express.Router();
+app.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
   const messages = [
     "Signing off for the day, Good night!",
     "Wrapping up, Good night everyone.",
@@ -28,7 +29,7 @@ router.get("/", (req, res) => {
 
   res.json({
     response_type: "ephemeral",
-    text: curr_text_msg,
+    text: curr_text_msg + req.body.username,
   });
 });
 
