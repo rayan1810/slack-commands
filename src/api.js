@@ -27,7 +27,10 @@ router.post("/", (req, res) => {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
   const config = {
-    headers: { Authorization: `Bearer ${req.body.token}` },
+    headers: {
+      Authorization: `Bearer ${req.body.token}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
   };
   const bodyParameters = {
     user: req.body.user_id,
