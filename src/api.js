@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
   }
 
   res.json({
-    response_type: "in_channel",
+    response_type: "ephemeral",
     text: curr_text_msg,
   });
 });
