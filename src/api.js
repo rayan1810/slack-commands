@@ -7,7 +7,7 @@ const axios = require("axios");
 const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
   const messages = [
     "Signing off for the day, Good night!",
     "Wrapping up, Good night everyone.",
@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   //     });
   //   });
   superagent
-    .post("https://slack.com/api/users.info")
+    .get("https://slack.com/api/users.info")
     .send({ user: req.body.user_id }) // sends a JSON post body
     .set("Content-Type", "application/x-www-form-urlencoded")
     .set("Authorization", `Bearer ${req.body.token}`)
