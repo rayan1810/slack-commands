@@ -26,29 +26,34 @@ router.post("/", (req, res) => {
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
-  const config = {
-    headers: {
-      Authorization: `Bearer ${req.body.token}`,
-    },
-  };
-  const bodyParameters = {
-    user: req.body.user_id,
-  };
-  axios
-    .post("https://slack.com/api/users.profile.get", bodyParameters, config)
-    .then(function (response) {
-      res.json({
-        response_type: "ephemeral",
-        text: curr_text_msg + JSON.stringify(response.data, null, 2),
-      });
-    })
-    .catch((err) => {
-      res.json({
-        response_type: "ephemeral",
-        text:
-          curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
-      });
-    });
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${req.body.token}`,
+  //   },
+  // };
+  // const bodyParameters = {
+  //   user: req.body.user_id,
+  // };
+  // Todo: - Fetch User RealName or Display Name from user.profile slack api
+  // axios
+  //   .get("https://slack.com/api/users.profile.get", bodyParameters, config)
+  //   .then(function (response) {
+  //     res.json({
+  //       response_type: "ephemeral",
+  //       text: curr_text_msg + JSON.stringify(response.data, null, 2),
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     res.json({
+  //       response_type: "ephemeral",
+  //       text:
+  //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
+  //     });
+  //   });
+  res.json({
+    response_type: "ephemeral",
+    text: req.body.user_name + ' says "' + curr_text_msg + '" ',
+  });
 });
 
 app.use("/.netlify/functions/api", router);
