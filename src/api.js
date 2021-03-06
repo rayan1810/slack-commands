@@ -49,23 +49,23 @@ router.get("/", (req, res) => {
   //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
   //     });
   //   });
-  superagent
-    .get("https://slack.com/api/users.info")
-    .send({ user: req.body.user_id }) // sends a JSON post body
-    .set("Content-Type", "application/x-www-form-urlencoded")
-    .set("Authorization", `Bearer ${req.body.token}`)
-    .end(function (err, res) {
-      res.json({
-        response_type: "ephemeral",
-        text:
-          curr_text_msg +
-          JSON.stringify(req.body, null, 2) +
-          "Error = " +
-          err +
-          "Response = " +
-          res,
-      });
-    });
+  // superagent
+  //   .get("https://slack.com/api/users.info")
+  //   .send({ user: req.body.user_id }) // sends a JSON post body
+  //   .set("Content-Type", "application/x-www-form-urlencoded")
+  //   .set("Authorization", `Bearer ${req.body.token}`)
+  //   .end(function (err, res) {
+  res.json({
+    response_type: "ephemeral",
+    // text:
+    //   curr_text_msg +
+    //   JSON.stringify(req.body, null, 2) +
+    //   "Error = " +
+    //   err +
+    //   "Response = " +
+    //   res,
+  });
+  //   });
 });
 
 app.use("/.netlify/functions/api", router);
