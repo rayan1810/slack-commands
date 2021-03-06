@@ -29,13 +29,13 @@ router.post("/", (req, res) => {
   const config = {
     headers: {
       Authorization: `Bearer ${req.body.token}`,
-      "Content-Type": "application/x-www-form-urlencoded",
     },
   };
   const bodyParameters = {
     user: req.body.user_id,
   };
-  axios.post("https://slack.com/api/users.info", bodyParameters, config)
+  axios
+    .post("https://slack.com/api/users.profile.get", bodyParameters, config)
     .then(function (response) {
       res.json({
         response_type: "ephemeral",
