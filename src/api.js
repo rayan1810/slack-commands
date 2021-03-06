@@ -26,37 +26,9 @@ router.post("/", (req, res) => {
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${req.body.token}`,
-  //   },
-  // };
-  // const bodyParameters = {
-  //   user: req.body.user_id,
-  // };
-  // Todo: - Fetch User RealName or Display Name from user.profile slack api
-  // axios
-  //   .get("https://slack.com/api/users.profile.get", bodyParameters, config)
-  //   .then(function (response) {
-  //     res.json({
-  //       response_type: "ephemeral",
-  //       text: curr_text_msg + JSON.stringify(response.data, null, 2),
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     res.json({
-  //       response_type: "ephemeral",
-  //       text:
-  //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
-  //     });
-  //   });
   res.json(
     {
       response_type: "ephemeral",
-      // text: {
-      //   type: "mrkdwn",
-      //   text: req.body.user_name + " says \n>" + curr_text_msg,
-      // },
       blocks: [
         {
           type: "section",
@@ -66,24 +38,35 @@ router.post("/", (req, res) => {
           },
         },
       ],
-    },
-    {
-      response_type: "in_channel",
-      // text: {
-      //   type: "mrkdwn",
-      //   text: req.body.user_name + " says \n>" + curr_text_msg,
-      // },
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
-          },
-        },
-      ],
-    },
+    }
+    // {
+    //   response_type: "in_channel",
+    //   blocks: [
+    //     {
+    //       type: "section",
+    //       text: {
+    //         type: "mrkdwn",
+    //         text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+    //       },
+    //     },
+    //   ],
+    // }
   );
+  res.redirect(200, "/message");
+});
+router.get("/message", (req, res) => {
+  res.json({
+    response_type: "in_channel",
+    blocks: [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `<@rohits> says \n>Hello`,
+        },
+      },
+    ],
+  });
 });
 
 app.use("/.netlify/functions/api", router);
