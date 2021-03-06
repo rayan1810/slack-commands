@@ -26,35 +26,30 @@ router.post("/", (req, res) => {
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
-  res.json(
-    {
-      response_type: "ephemeral",
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
-          },
-        },
-      ],
-    }
-    // {
-    //   response_type: "in_channel",
-    //   blocks: [
-    //     {
-    //       type: "section",
-    //       text: {
-    //         type: "mrkdwn",
-    //         text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
-    //       },
-    //     },
-    //   ],
-    // }
-  );
-  res.redirect(200, "/message");
-});
-router.get("/message", (req, res) => {
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  const bodyParameters = {
+    text: "Thanks for your request, we'll process it and get back to you.",
+  };
+  // Todo: - Fetch User RealName or Display Name from user.profile slack api
+  axios
+    .post(req.body.response_url, bodyParameters, config)
+    .then(function (response) {
+      res.json({
+        response_type: "ephemeral",
+        text: curr_text_msg + JSON.stringify(response.data, null, 2),
+      });
+    })
+    .catch((err) => {
+      res.json({
+        response_type: "ephemeral",
+        text:
+          curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
+      });
+    });
   res.json({
     response_type: "in_channel",
     blocks: [
@@ -62,7 +57,7 @@ router.get("/message", (req, res) => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `<@rohits> says \n>Hello`,
+          text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
         },
       },
     ],
