@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
 
   res.json({
     response_type: "ephemeral",
-    text: curr_text_msg + req.body.username,
+    text: curr_text_msg + JSON.stringify(req.body, null, 2),
   });
 });
 
