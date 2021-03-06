@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
     .catch(function (err) {
       res.json({
         response_type: "ephemeral",
-        text: curr_text_msg + JSON.stringify(err, null, 2),
+        text: curr_text_msg + "Error",
       });
     });
 });
