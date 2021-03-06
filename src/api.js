@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
 
 const app = express();
-const Axios = require("axios");
+const axios = require("axios");
 const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
   const bodyParameters = {
     user: req.body.user_id,
   };
-  Axios.get("https://slack.com/api/users.info", bodyParameters, config)
+  axios.post("https://slack.com/api/users.info", bodyParameters, config)
     .then(function (response) {
       res.json({
         response_type: "ephemeral",
