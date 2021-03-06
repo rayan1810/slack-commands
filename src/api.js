@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
-
+const superagent = require("superagent");
 const app = express();
 const axios = require("axios");
 const router = express.Router();
@@ -26,27 +26,44 @@ router.post("/", (req, res) => {
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
-  const config = {
-    headers: {
-      Authorization: `Bearer ${req.body.token}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  };
-  const bodyParameters = {
-    user: req.body.user_id,
-  };
-  axios.post("https://slack.com/api/users.info", bodyParameters, config)
-    .then(function (response) {
-      res.json({
-        response_type: "ephemeral",
-        text: curr_text_msg + JSON.stringify(response, null, 2),
-      });
-    })
-    .catch((err) => {
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${req.body.token}`,
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  // };
+  // const bodyParameters = {
+  //   user: req.body.user_id,
+  // };
+  // axios.post("https://slack.com/api/users.info", bodyParameters, config)
+  //   .then(function (response) {
+  //     res.json({
+  //       response_type: "ephemeral",
+  //       text: curr_text_msg + JSON.stringify(response, null, 2),
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     res.json({
+  //       response_type: "ephemeral",
+  //       text:
+  //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
+  //     });
+  //   });
+  superagent
+    .post("https://slack.com/api/users.info")
+    .send({ user: req.body.user_id }) // sends a JSON post body
+    .set("Content-Type", "application/x-www-form-urlencoded")
+    .set("Authorization", `Bearer ${req.body.token}`)
+    .end(function (err, res) {
       res.json({
         response_type: "ephemeral",
         text:
-          curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
+          curr_text_msg +
+          JSON.stringify(req.body, null, 2) +
+          "Error = " +
+          err +
+          "Response = " +
+          res,
       });
     });
 });
