@@ -61,8 +61,7 @@ router.post("/", (req, res) => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text:
-            "This is unquoted text\n>This is quoted text\n>This is still quoted text\nThis is unquoted text again",
+          text: `${req.body.user_name} says \n>${curr_text_msg}`,
         },
       },
     ],
