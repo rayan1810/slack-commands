@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
   //     });
   //   });
-  res.json(
+  res.json([
     {
       response_type: "ephemeral",
       // text: {
@@ -67,25 +67,23 @@ router.post("/", (req, res) => {
         },
       ],
     },
-    (res) => {
-      res.json({
-        response_type: "in_channel",
-        // text: {
-        //   type: "mrkdwn",
-        //   text: req.body.user_name + " says \n>" + curr_text_msg,
-        // },
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
-            },
+    {
+      response_type: "in_channel",
+      // text: {
+      //   type: "mrkdwn",
+      //   text: req.body.user_name + " says \n>" + curr_text_msg,
+      // },
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
           },
-        ],
-      });
-    }
-  );
+        },
+      ],
+    },
+  ]);
 });
 
 app.use("/.netlify/functions/api", router);
