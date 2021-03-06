@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
   //     });
   //   });
   res.json({
-    response_type: "ephemeral",
+    response_type: "in_channel",
     // text: {
     //   type: "mrkdwn",
     //   text: req.body.user_name + " says \n>" + curr_text_msg,
