@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
   //   });
   res.json({
     response_type: "ephemeral",
-    text: req.body.user_name + ' says "' + curr_text_msg + '" ',
+    text: req.body.user_name + " says >" + curr_text_msg,
   });
 });
 
