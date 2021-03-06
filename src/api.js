@@ -50,7 +50,7 @@ router.post("/", (req, res) => {
   //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
   //     });
   //   });
-  res.json([
+  res.json(
     {
       response_type: "ephemeral",
       // text: {
@@ -83,7 +83,7 @@ router.post("/", (req, res) => {
         },
       ],
     },
-  ]);
+  );
 });
 
 app.use("/.netlify/functions/api", router);
