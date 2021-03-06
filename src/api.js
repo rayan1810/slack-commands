@@ -42,7 +42,8 @@ router.post("/", (req, res) => {
     .catch((err) => {
       res.json({
         response_type: "ephemeral",
-        text: curr_text_msg + "Error = " + err,
+        text:
+          curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
       });
     });
 });
