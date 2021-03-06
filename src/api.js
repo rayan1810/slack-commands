@@ -52,10 +52,20 @@ router.post("/", (req, res) => {
   //   });
   res.json({
     response_type: "ephemeral",
-    text: {
-      type: "mrkdwn",
-      text: req.body.user_name + " says \n>" + curr_text_msg,
-    },
+    // text: {
+    //   type: "mrkdwn",
+    //   text: req.body.user_name + " says \n>" + curr_text_msg,
+    // },
+    blocks: [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text:
+            "This is unquoted text\n>This is quoted text\n>This is still quoted text\nThis is unquoted text again",
+        },
+      },
+    ],
   });
 });
 
