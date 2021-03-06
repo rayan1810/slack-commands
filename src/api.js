@@ -39,10 +39,10 @@ router.post("/", (req, res) => {
         text: curr_text_msg + JSON.stringify(response, null, 2),
       });
     })
-    .catch(function (err) {
+    .catch((err) => {
       res.json({
         response_type: "ephemeral",
-        text: curr_text_msg + "Error",
+        text: curr_text_msg + "Error = " + err,
       });
     });
 });
