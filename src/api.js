@@ -80,6 +80,13 @@ router.post("/", (req, res) => {
           text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
         },
       },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `in these tough times we all have been dealing with a lot, and that is slowly pulling us apart, for this reason I would encourage you to atleast call it a day with your personal touch so that everyone can feel more human and connected in our goodbye's. Since you are expecting a Signing off message here's what you can use for your message today. And please do add something distict to your message.\n>${curr_text_msg} `,
+        },
+      },
     ],
   });
 });
