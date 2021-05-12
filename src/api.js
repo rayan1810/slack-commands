@@ -60,7 +60,7 @@ router.post("/", (req, res) => {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `Hi <@${req.body.user_name}>,  just wanted to say what someone quoted`,
+              text: `Hi <@${req.body.user_name}>,  someone rightly said`,
             },
           },
           {
