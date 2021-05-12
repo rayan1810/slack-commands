@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
     " and a Happy Weekend everyone 🏝️",
   ];
   const randomInd = Math.floor(Math.random() * 3);
+  const showPersonalTouch = Math.floor(Math.random() * 24) % 5 === 0;
   let curr_text_msg = messages[randomInd];
   let today = new Date();
   if (today.getDay() == 5 || today.getDay() == 6) {
@@ -51,44 +52,47 @@ router.post("/", (req, res) => {
   //     });
   //   });
   // ----Old
-  // res.json({
-  //   response_type: "in_channel",
-  //   blocks: [
-  //     {
-  //       type: "section",
-  //       text: {
-  //         type: "mrkdwn",
-  //         text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
-  //       },
-  //     },
-  //   ],
-  // });
   res.json({
-    response_type: "ephemeral",
-    blocks: [
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `Hi <@${req.body.user_name}>,  just wanted to say what someone quoted`,
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
-        },
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `In these tough times we all have been dealing with a lot, and that is slowly pulling us apart, for saving our culture and bond I would encourage you to at least call it a day with your personal touch sometimes, so that everyone can feel more human and connected in our goodbyes. Since you are expecting a Signing off message here's what you can use for your message today. And please do add something distict in your message.\n>${curr_text_msg} `,
-        },
-      },
-    ],
+    response_type: "in_channel",
+    blocks: [],
   });
+
+  res.json(
+    showPersonalTouch
+      ? {
+          response_type: showPersonalTouch ? "ephemeral" : "in_channel",
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `Hi <@${req.body.user_name}>,  just wanted to say what someone quoted`,
+              },
+            },
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
+              },
+            },
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `In these tough times we all have been dealing with a lot, and that is slowly pulling us apart, for saving our culture and bond I would encourage you to at least call it a day with your personal touch sometimes, so that everyone can feel more human and connected in our goodbyes. Since you are expecting a Signing off message here's what you can use for your message today. And please do add something distict in your message.\n>${curr_text_msg} `,
+              },
+            },
+          ],
+        }
+      : {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+          },
+        }
+  );
 });
 
 app.use("/.netlify/functions/api", router);
