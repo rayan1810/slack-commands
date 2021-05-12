@@ -51,11 +51,6 @@ router.post("/", (req, res) => {
   //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
   //     });
   //   });
-  // ----Old
-  res.json({
-    response_type: "in_channel",
-    blocks: [],
-  });
 
   res.json(
     showPersonalTouch
