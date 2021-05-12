@@ -50,14 +50,34 @@ router.post("/", (req, res) => {
   //         curr_text_msg + JSON.stringify(req.body, null, 2) + "Error = " + err,
   //     });
   //   });
+  // ----Old
+  // res.json({
+  //   response_type: "in_channel",
+  //   blocks: [
+  //     {
+  //       type: "section",
+  //       text: {
+  //         type: "mrkdwn",
+  //         text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+  //       },
+  //     },
+  //   ],
+  // });
   res.json({
-    response_type: "in_channel",
+    response_type: "ephemeral",
     blocks: [
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+          text: `Hi <@${req.body.user_name}>,  just wanted to convey this message that `,
+        },
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `in this tough times we all have been dealing with our own problems apart and loosing the sense of what makes us humans.  \n>${curr_text_msg}`,
         },
       },
     ],
