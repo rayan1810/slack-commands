@@ -70,14 +70,14 @@ router.post("/", (req, res) => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `Hi <@${req.body.user_name}>,  just wanted to convey this message that `,
+          text: `Hi <@${req.body.user_name}>,  just wanted to say what someone quoted`,
         },
       },
       {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `in this tough times we all have been dealing with our own problems apart and loosing the sense of what makes us humans.  \n>${curr_text_msg}`,
+          text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
         },
       },
     ],
