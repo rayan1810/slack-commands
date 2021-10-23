@@ -63,7 +63,7 @@ router.post("/", (req, res) => {
         ],
       });
     } else {
-      addBirthday(birthdate, req.body.user_name);
+      // addBirthday(birthdate, req.body.user_name);
     }
   } else {
     // const config = {
