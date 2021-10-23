@@ -82,11 +82,18 @@ router.post("/", (req, res) => {
             },
           ]
         : [
+            // {
+            //   type: "section",
+            //   text: {
+            //     type: "mrkdwn",
+            //     text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+            //   },
+            // },
             {
               type: "section",
               text: {
                 type: "mrkdwn",
-                text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+                text: `<@${req.body}> `,
               },
             },
           ],
