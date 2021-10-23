@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
+const { createClient } = require("@supabase/supabase-js");
+const supabaseUrl = "https://smorvzcentuxgmhpoejx.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
 const axios = require("axios");
@@ -20,7 +24,7 @@ router.post("/", (req, res) => {
     " and a Happy Weekend 😄",
     " and a Happy Weekend everyone 🏝️",
   ];
-
+  const birthday_messages = ["Signing off for the day, Good night!"];
   const showRandomInitiativeMessage = false;
   const randomInd = Math.floor(Math.random() * 3);
   const showPersonalTouch = Math.floor(Math.random() * 24) % 5 === 0;
@@ -29,6 +33,10 @@ router.post("/", (req, res) => {
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
+
+  const { data, error } = await supabase
+    .from("Birthdays")
+    .upsert([{ birthday: "24 Oct", slackid: req.body.user_name }]);
   // const config = {
   //   headers: {
   //     "Content-type": "application/json",
@@ -93,7 +101,7 @@ router.post("/", (req, res) => {
               type: "section",
               text: {
                 type: "mrkdwn",
-                text: `${JSON.stringify(req.body,null,2)}`,
+                text: `${JSON.stringify(req.body, null, 2)}`,
               },
             },
           ],
