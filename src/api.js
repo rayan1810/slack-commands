@@ -3,8 +3,7 @@ const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
 const { createClient } = require("@supabase/supabase-js");
 const supabaseUrl = "https://smorvzcentuxgmhpoejx.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDk3NDE0MSwiZXhwIjoxOTUwNTUwMTQxfQ.BT4u0bUMzkGDyAJFVXLJz02Ph3c9RbtseX67eHg_qzE";
+const supabaseKey =process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
