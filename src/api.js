@@ -20,6 +20,8 @@ router.post("/", (req, res) => {
     " and a Happy Weekend 😄",
     " and a Happy Weekend everyone 🏝️",
   ];
+
+  const showRandomInitiativeMessage = false;
   const randomInd = Math.floor(Math.random() * 3);
   const showPersonalTouch = Math.floor(Math.random() * 24) % 5 === 0;
   let curr_text_msg = messages[randomInd];
@@ -54,39 +56,40 @@ router.post("/", (req, res) => {
 
   res.json({
     response_type: showPersonalTouch ? "ephemeral" : "in_channel",
-    blocks: showPersonalTouch
-      ? [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `Hi <@${req.body.user_name}>,  someone rightly said`,
+    blocks:
+      showPersonalTouch && showRandomInitiativeMessage
+        ? [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `Hi <@${req.body.user_name}>,  someone rightly said`,
+              },
             },
-          },
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `\n>Be strong now, because things will get better. It might be stormy now, but it can't rain forever. `,
+              },
             },
-          },
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `In these tough times we all have been dealing with a lot, and that is slowly pulling us apart, for saving our culture and bond I would encourage you to at least call it a day with your personal touch sometimes, so that everyone can feel more human and connected in our goodbyes. Since you are expecting a Signing off message here's what you can use for your message today. And please do add something distict in your message.\n>${curr_text_msg} `,
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `In these tough times we all have been dealing with a lot, and that is slowly pulling us apart, for saving our culture and bond I would encourage you to at least call it a day with your personal touch sometimes, so that everyone can feel more human and connected in our goodbyes. Since you are expecting a Signing off message here's what you can use for your message today. And please do add something distict in your message.\n>${curr_text_msg} `,
+              },
             },
-          },
-        ]
-      : [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+          ]
+        : [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text: `<@${req.body.user_name}> says \n>${curr_text_msg}`,
+              },
             },
-          },
-        ],
+          ],
   });
 });
 
