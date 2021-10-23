@@ -138,21 +138,22 @@ router.post("/", (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  addBirthday("23 Oct", "Rohit_Singh");
-  res.json({
-    response_type: "in_channel",
-    blocks: [
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: `asdasd asd `,
-        },
-      },
-    ],
-  });
-});
+// router.get("/test", (req, res) => {
+//   addBirthday("23 Oct", "Rohit_Singh");
+//   res.json({
+//     response_type: "in_channel",
+//     blocks: [
+//       {
+//         type: "section",
+//         text: {
+//           type: "mrkdwn",
+//           text: `asdasd asd `,
+//         },
+//       },
+//     ],
+//   });
+// });
+
 app.use("/.netlify/functions/api", router);
 
 module.exports.handler = serverless(app);
