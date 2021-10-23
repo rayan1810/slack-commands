@@ -93,7 +93,7 @@ router.post("/", (req, res) => {
               type: "section",
               text: {
                 type: "mrkdwn",
-                text: `<@${req.body}> `,
+                text: `${JSON.stringify(req.body,null,2)}`,
               },
             },
           ],
