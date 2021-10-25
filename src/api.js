@@ -1,28 +1,28 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const serverless = require("serverless-http");
-const { createClient } = require("@supabase/supabase-js");
-const supabaseUrl = "https://smorvzcentuxgmhpoejx.supabase.co";
-const supabaseKey =process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+// const { createClient } = require("@supabase/supabase-js");
+// const supabaseUrl = "https://smorvzcentuxgmhpoejx.supabase.co";
+// const supabaseKey =process.env.SUPABASE_KEY;
+// const supabase = createClient(supabaseUrl, supabaseKey);
 
 const app = express();
 const axios = require("axios");
 const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const addBirthday = async (birthday, username) => {
-  const { data, error } = await supabase
-    .from("Birthdays")
-    .upsert([{ birthday: birthday, slackid: username }]);
+// const addBirthday = async (birthday, username) => {
+//   const { data, error } = await supabase
+//     .from("Birthdays")
+//     .upsert([{ birthday: birthday, slackid: username }]);
 
-  if (error) {
-    console.log("error ", error);
-    return;
-  }
+//   if (error) {
+//     console.log("error ", error);
+//     return;
+//   }
 
-  console.log("data ", data);
-};
+//   console.log("data ", data);
+// };
 
 router.post("/", (req, res) => {
   const messages = [
@@ -37,35 +37,35 @@ router.post("/", (req, res) => {
     " and a Happy Weekend 😄",
     " and a Happy Weekend everyone 🏝️",
   ];
-  const birthday_messages = ["Signing off for the day, Good night!"];
+  // const birthday_messages = ["Signing off for the day, Good night!"];
   const showRandomInitiativeMessage = false;
   const randomInd = Math.floor(Math.random() * 3);
   const showPersonalTouch = Math.floor(Math.random() * 24) % 5 === 0;
-  const text = req.body.text;
+  // const text = req.body.text;
   let curr_text_msg = messages[randomInd];
   let today = new Date();
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
   }
-  if (text.includes("setBirthday")) {
-    let birthdate = Date.parse(text.split("setBirthday ")[1]);
-    if (birthdate === NaN) {
-      res.json({
-        response_type: "ephemeral",
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: `>Yes I have got validation checks , please enter your correct birthday!>`,
-            },
-          },
-        ],
-      });
-    } else {
-      // addBirthday(birthdate, req.body.user_name);
-    }
-  } else {
+  // if (text.includes("setBirthday")) {
+    // let birthdate = Date.parse(text.split("setBirthday ")[1]);
+    // if (birthdate === NaN) {
+    //   res.json({
+    //     response_type: "ephemeral",
+    //     blocks: [
+    //       {
+    //         type: "section",
+    //         text: {
+    //           type: "mrkdwn",
+    //           text: `>Yes I have got validation checks , please enter your correct birthday!>`,
+    //         },
+    //       },
+    //     ],
+    //   });
+    // } else {
+    //   // addBirthday(birthdate, req.body.user_name);
+    // }
+  // } else {
     // const config = {
     //   headers: {
     //     "Content-type": "application/json",
@@ -135,7 +135,7 @@ router.post("/", (req, res) => {
               },
             ],
     });
-  }
+  // }
 });
 
 // router.get("/test", (req, res) => {
