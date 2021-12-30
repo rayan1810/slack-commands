@@ -38,10 +38,10 @@ router.post("/", (req, res) => {
     " and a Happy Weekend everyone 🏝️",
   ];
   const new_year_weekend_messages = [
-    "Signing off for this year, See you next year, Have a Happy new year and lots of fun 🏖️",
-    "Akashvaani ke smachar yahi samapt hote hai, Milte hai agle saal, Have a Happy New Year 🌴",
+    "Signing off for this year, See you next year, Have a Happy new year and lots of fun ✨",
+    "Akashvaani ke smachar yahi samapt hote hai, Milte hai agle saal, Have a Happy New Year ✨🎆",
     "Wrapping up for the year, See you all on the other side, Have a Happy new year, have fun 😄",
-    "Done for this year, Writing off 2021 off my calender, See you next year, Have a Happy new year everyone 🏝️",
+    "Done for this year, Writing off 2021 off my calender, See you next year, Have a Happy new year everyone 🎆🏝️",
   ];
   // const birthday_messages = ["Signing off for the day, Good night!"];
   const showRandomInitiativeMessage = false;
