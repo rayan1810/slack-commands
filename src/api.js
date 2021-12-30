@@ -37,6 +37,12 @@ router.post("/", (req, res) => {
     " and a Happy Weekend 😄",
     " and a Happy Weekend everyone 🏝️",
   ];
+  const new_year_weekend_messages = [
+    "Signing off for this year, See you next year, Have a Happy new year and lots of fun 🏖️",
+    "Akashvaani ka smachar yahi samapt hota hai, Milte hai agle saal, Have a Happy New Year 🌴",
+    "Ending the year ( on a happy note I guess 🤔 ), See you all on the other side, Have a Happy new year, have fun 😄",
+    "Done for this year, Writing off 2021 off my calender, See you next year, Have a Happy new year everyone 🏝️",
+  ];
   // const birthday_messages = ["Signing off for the day, Good night!"];
   const showRandomInitiativeMessage = false;
   const randomInd = Math.floor(Math.random() * 3);
@@ -46,6 +52,9 @@ router.post("/", (req, res) => {
   let today = new Date();
   if (today.getDay() == 5 || today.getDay() == 6) {
     curr_text_msg = curr_text_msg.slice(0, -1) + weekend_messages[randomInd];
+  }
+  if (today.getDate() == 30 && today.getMonth() == 11) {
+    curr_text_msg = new_year_weekend_messages[randomInd];
   }
   // if (text.includes("setBirthday")) {
   // let birthdate = Date.parse(text.split("setBirthday ")[1]);
