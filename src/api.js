@@ -149,11 +149,6 @@ router.post("/", (req, res) => {
             //   },
             // },
           ],
-          attachments:[
-            {
-              image_url:"https://c.tenor.com/gaQV766yYJ0AAAAi/cute-wave.gif"
-            }
-          ]
   });
   // }
 });
